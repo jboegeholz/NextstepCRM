@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="de.creatronix.artist3k.model">
+	<class name="Application" table="ns_application" lazy="false">
+
+		<id name="id">
+			<column name="application_id" />
+			<generator class="native" />
+		</id>
+		<property name="status" type="java.lang.String">
+			<column name="status" />
+		</property>
+		<property name="sendDate" type="calendar_date">
+			<column name="sendDate" />
+		</property>
+		<property name="desiredDate" type="calendar_date">
+			<column name="desiredDate" />
+		</property>
+		<property name="askedForPosterAndFlyerDate" type="calendar_date">
+			<column name="askedForPosterAndFlyerDate" />
+		</property>
+		<property name="sendPosterAndFlyerDate" type="calendar_date">
+			<column name="sendPosterAndFlyerDate" />
+		</property>
+		<property name="numberOfSentPosters" type="java.lang.String">
+			<column name="numberOfSentPosters" />
+		</property>
+		<property name="numberOfSentFlyers" type="java.lang.String">
+			<column name="numberOfSentFlyers" />
+		</property>
+		<property name="demandedFee" type="java.math.BigDecimal">
+			<column name="demandedFee" />
+		</property>
+		<property name="transportationCosts" type="java.math.BigDecimal">
+			<column name="transportationCosts" />
+		</property>
+		<property name="lodgingCosts" type="java.math.BigDecimal">
+			<column name="lodgingCosts" />
+		</property>
+		<property name="receivedFee" type="java.math.BigDecimal">
+			<column name="receivedFee" />
+		</property>
+		<property name="receivedExpenses" type="java.math.BigDecimal">
+			<column name="receivedExpenses" />
+		</property>
+		<property name="comment" type="java.lang.String">
+			<column name="comment" />
+		</property>
+
+		<many-to-one name="stageAct" class="StageAct" cascade="save-update, persist" />
+		<many-to-one name="booker" class="User" cascade="save-update, persist" />
+		<many-to-one name="event" class="Event" cascade="save-update, persist" />
+		<many-to-one name="location" class="Location" cascade="save-update, persist" />
+
+	</class>
+</hibernate-mapping>

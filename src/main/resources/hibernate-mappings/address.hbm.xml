@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="de.creatronix.artist3k.model">
+	<class name="Address" table="ns_address" lazy="false">
+
+		<id name="id">
+			<column name="address_id" />
+			<generator class="native" />
+		</id>
+		<property name="street" type="java.lang.String">
+			<column name="street" />
+		</property>
+		<property name="streetNumber" type="java.lang.String">
+			<column name="streetNumber" />
+		</property>
+		<property name="zipcode" type="java.lang.String">
+			<column name="zipcode" />
+		</property>
+		<property name="town" type="java.lang.String">
+			<column name="town" />
+		</property>
+		<property name="country" type="java.lang.String">
+			<column name="country" />
+		</property>
+		<property name="geoCoordinates" type="java.lang.String">
+			<column name="geoCoordinates" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="de.creatronix.artist3k.model">
+	<class name="Location" table="ns_location" lazy="false">
+
+		<id name="name" column="name" type="java.lang.String">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="locationType" />
+		<property name="url" />
+
+		<many-to-one lazy="false" name="address" class="Address" insert="true"
+			 foreign-key="address" column="address">
+		</many-to-one>
+
+		<set lazy="false" name="contactPersons" table="location_contact_persons"
+			cascade="save-update,persist">
+			<key column="name" />
+			<many-to-many column="contact_person_id"
+				class="ContactPerson" />
+		</set>
+	</class>
+</hibernate-mapping>

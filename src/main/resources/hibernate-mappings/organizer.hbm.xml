@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="de.creatronix.artist3k.model">
+	<class name="Organizer" table="ns_organizer" lazy="false">
+
+		<id name="name">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="url" />
+		<many-to-one name="address" class="Address" />
+		<set name="contactPersons" table="organizer_contact_persons"
+			cascade="save-update,persist">
+			<key column="name" />
+			<many-to-many column="contact_person_id"
+				class="ContactPerson" />
+		</set>
+	</class>
+</hibernate-mapping>

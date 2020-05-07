@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- Database connection settings -->
+		<property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+		<property name="connection.url">jdbc:hsqldb:mem:aname</property>
+		<property name="connection.username">sa</property>
+		<property name="connection.password"></property>
+
+		<!--		 JDBC connection pool (use the built-in) -->
+		<property name="c3p0.min_size">5</property>
+		<property name="c3p0.max_size">20</property>
+		<property name="c3p0.timeout">300</property>
+		<property name="c3p0.max_statements">50</property>
+		<property name="c3p0.idle_test_period">3000</property>
+
+
+		<!-- SQL dialect -->
+		<property name="dialect">
+			org.hibernate.dialect.HSQLDialect
+		</property>
+
+
+
+		<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+
+		<!--
+			Drop and re-create the database schema on startup update or create
+		-->
+		<property name="hbm2ddl.auto">create</property>
+
+
+		<mapping resource="hibernate-mappings/event.hbm.xml" />
+		<mapping resource="hibernate-mappings/address.hbm.xml" />
+		<mapping resource="hibernate-mappings/contact_details.hbm.xml" />
+		<mapping resource="hibernate-mappings/contact_person.hbm.xml" />
+		<mapping resource="hibernate-mappings/location.hbm.xml" />
+		<mapping resource="hibernate-mappings/organizer.hbm.xml" />
+		<mapping resource="hibernate-mappings/user.hbm.xml" />
+		<mapping resource="hibernate-mappings/artist.hbm.xml" />
+		<mapping resource="hibernate-mappings/application.hbm.xml" />
+		<mapping resource="hibernate-mappings/stage_act.hbm.xml" />
+		<mapping resource="hibernate-mappings/off_day.hbm.xml" />
+
+
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="de.creatronix.artist3k.model">
+	<class name="Artist" table="ns_artist" lazy="false">
+
+		<id name="alias"></id>
+		<property name="surname" type="java.lang.String">
+			<column name="surname" />
+		</property>
+		<property name="firstname" type="java.lang.String">
+			<column name="firstname" />
+		</property>
+		<property name="instrument" type="java.lang.String">
+			<column name="instrument" />
+		</property>
+		<many-to-one name="contactDetails" class="ContactDetails"
+			insert="true" cascade="save-update, persist"
+			foreign-key="contactDetails" column="contactDetails">
+		</many-to-one>
+
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans>
+
+		<form-bean name="applicationListForm"
+			type="de.creatronix.artist3k.controller.form.ApplicationListForm" />
+		<form-bean name="applicationEditForm"
+			type="de.creatronix.artist3k.controller.form.ApplicationEditForm" />
+		<form-bean name="applicationAddForm"
+			type="de.creatronix.artist3k.controller.form.ApplicationAddForm" />
+		<form-bean name="applicationDetailsForm"
+			type="de.creatronix.artist3k.controller.form.ApplicationDetailsForm" />
+		<form-bean name="eventListForm"
+			type="de.creatronix.artist3k.controller.form.EventListForm" />
+		<form-bean name="eventEditForm"
+			type="de.creatronix.artist3k.controller.form.EventEditForm" />
+		<form-bean name="eventDetailsForm"
+			type="de.creatronix.artist3k.controller.form.EventDetailsForm" />
+		<form-bean name="userListForm"
+			type="de.creatronix.artist3k.controller.form.UserListForm" />
+		<form-bean name="userAddForm"
+			type="de.creatronix.artist3k.controller.form.UserAddForm" />
+		<form-bean name="loginForm"
+			type="de.creatronix.artist3k.controller.form.LoginForm" />
+		<form-bean name="locationListForm"
+			type="de.creatronix.artist3k.controller.form.LocationListForm" />
+		<form-bean name="locationAddForm"
+			type="de.creatronix.artist3k.controller.form.LocationAddForm" />
+		<form-bean name="locationEditForm"
+			type="de.creatronix.artist3k.controller.form.LocationEditForm" />
+		<form-bean name="calendarForm"
+			type="de.creatronix.artist3k.controller.form.CalendarForm" />
+		<form-bean name="locationDetailsForm"
+			type="de.creatronix.artist3k.controller.form.LocationDetailsForm" />
+		<form-bean name="stageActListForm"
+			type="de.creatronix.artist3k.controller.form.StageActListForm" />
+		<form-bean name="organizerListForm"
+			type="de.creatronix.artist3k.controller.form.OrganizerListForm" />
+		<form-bean name="statsForm"
+			type="de.creatronix.artist3k.controller.form.StatsForm" />
+	</form-beans>
+
+
+	<global-forwards>
+		<forward name="login" path="/login.do" />
+
+	</global-forwards>
+
+
+
+	<action-mappings>
+		<action path="/default" forward="/jsp/index.jsp" unknown="true" />
+
+
+
+		<!-- Login / logout -->
+
+		<action path="/login" forward="/jsp/login.jsp" />
+
+		<action path="/loginsubmit" input="/jsp/login.jsp"
+			name="loginForm" scope="request"
+			type="de.creatronix.artist3k.controller.action.LoginAction"
+			validate="true">
+			<forward name="success" path="/default.do" />
+		</action>
+
+		<action path="/logout"
+			type="de.creatronix.artist3k.controller.action.LogoutAction">
+			<forward name="login" path="/jsp/login.jsp"></forward>
+		</action>
+
+		<!-- applications * -->
+		<action path="/showAddApplication"
+			forward="/jsp/applicationAdd.jsp" />
+
+		<action path="/applicationList" name="applicationListForm"
+			type="de.creatronix.artist3k.controller.action.ApplicationListAction">
+			<forward name="showApplicationList"
+				path="/jsp/applicationList.jsp" />
+		</action>
+
+		<action path="/applicationEdit" attribute="applicationEditForm"
+			name="applicationEditForm" parameter="do" scope="request"
+			type="de.creatronix.artist3k.controller.action.ApplicationEditAction"
+			validate="true" input="/jsp/applicationEdit.jsp">
+			<forward name="showApplicationEdit" path="/jsp/applicationEdit.jsp" />
+			<forward name="showApplicationList"
+				path="/applicationList.do" redirect="true" />
+			<forward name="showAdd" path="/jsp/eventAdd.jsp" />
+		</action>
+
+		<action path="/applicationAdd" parameter="do" scope="request"
+			type="de.creatronix.artist3k.controller.action.ApplicationAddAction"
+			attribute="applicationAddForm" name="applicationAddForm"
+			validate="true" input="/applicationAdd.do?do=addApplication">
+			<forward name="showApplicationList"
+				path="/applicationList.do" redirect="true" />
+			<forward name="showAddApplication"
+				path="/jsp/applicationAdd.jsp" />
+		</action>
+
+		<action path="/applicationDetails" parameter="do"
+			scope="request"
+			type="de.creatronix.artist3k.controller.action.ApplicationDetailsAction"
+			attribute="applicationDetailsForm" name="applicationDetailsForm"
+			validate="false">
+			<forward name="showApplicationDetails"
+				path="/jsp/applicationDetails.jsp" />
+		</action>
+
+		<!-- event * -->
+		<action path="/showAdd" forward="/jsp/eventAdd.jsp" />
+
+		<action path="/eventList" attribute="eventListForm"
+			input="/jsp/eventList.jsp" name="eventListForm" parameter="step"
+			scope="request"
+			type="de.creatronix.artist3k.controller.action.EventListAction"
+			validate="false">
+			<forward name="showList" path="/jsp/eventList.jsp" />
+		</action>
+
+		<action path="/eventEdit" attribute="eventEditForm"
+			name="eventEditForm" parameter="do" scope="request"
+			type="de.creatronix.artist3k.controller.action.EventEditAction"
+			validate="true" input="/jsp/eventEdit.jsp">
+			<forward name="showEdit" path="/jsp/eventEdit.jsp" />
+			<forward name="showList" path="/eventList.do"
+				redirect="true" />
+			<forward name="showAdd" path="/jsp/eventAdd.jsp" />
+			<forward name="showAddLocation"
+				path="/jsp/locationAdd.jsp">
+			</forward>
+		</action>
+
+		<action path="/eventDetails" parameter="do" scope="request"
+			type="de.creatronix.artist3k.controller.action.EventDetailsAction"
+			attribute="eventDetailsForm" name="eventDetailsForm">
+			<forward name="eventDetails" path="/jsp/eventDetails.jsp" />
+		</action>
+
+		<action path="/eventAdd" parameter="do" scope="request"
+			type="de.creatronix.artist3k.controller.action.EventAddAction"
+			attribute="eventEditForm" name="eventEditForm" validate="true"
+			input="/jsp/eventAdd.jsp">
+			<forward name="showList" path="/eventList.do"
+				redirect="true" />
+			<forward name="showAdd" path="/jsp/eventAdd.jsp" />
+		</action>
+
+		<!-- stageActs -->
+		<action path="/stageActList"
+			type="de.creatronix.artist3k.controller.action.StageActListAction"
+			name="stageActListForm">
+			<forward name="showStageActList"
+				path="/jsp/stageActList.jsp" />
+		</action>
+
+		<!-- locations -->
+
+		<action path="/showAddLocation" forward="/jsp/locationAdd.jsp" />
+
+		<action path="/locationAdd" parameter="do" scope="request"
+			type="de.creatronix.artist3k.controller.action.LocationAddAction"
+			attribute="locationAddForm" name="locationAddForm" validate="true"
+			input="/jsp/locationAdd.jsp">
+			<forward name="showLocationList" path="/locationList.do"
+				redirect="true" />
+		</action>
+
+		<action path="/locationEdit" parameter="do" scope="request"
+			type="de.creatronix.artist3k.controller.action.LocationEditAction"
+			attribute="locationEditForm" name="locationEditForm" validate="true"
+			input="/jsp/locationEdit.jsp">
+			<forward name="showLocationList" path="/locationList.do"
+				redirect="true" />
+			<forward name="showLocationEdit"
+				path="/jsp/locationEdit.jsp" />
+		</action>
+
+		<action path="/locationList" attribute="locationListForm"
+			input="/jsp/locationList.jsp" name="locationListForm"
+			parameter="step" scope="request"
+			type="de.creatronix.artist3k.controller.action.LocationListAction"
+			validate="false">
+			<forward name="showLocationList"
+				path="/jsp/locationList.jsp" />
+		</action>
+
+		<action path="/locationDetails" parameter="do" scope="request"
+			attribute="locationDetailsForm" name="locationDetailsForm"
+			type="de.creatronix.artist3k.controller.action.LocationDetailsAction"
+			validate="false">
+			<forward name="showLocationDetails"
+				path="/jsp/locationDetails.jsp" />
+		</action>
+
+		<!-- organizers -->
+		<action path="/organizerList" attribute="organizerListForm"
+			input="/jsp/organizerList.jsp" name="organizerListForm"
+			parameter="step" scope="request"
+			type="de.creatronix.artist3k.controller.action.OrganizerListAction"
+			validate="false">
+			<forward name="showOrganizerList"
+				path="/jsp/organizerList.jsp" />
+		</action>
+
+		<!-- users -->
+		<action path="/userList" attribute="userListForm"
+			input="/jsp/userList.jsp" unknown="true" name="userListForm"
+			parameter="step" scope="request"
+			type="de.creatronix.artist3k.controller.action.UserListAction"
+			validate="false">
+			<forward name="showUserList" path="/jsp/userList.jsp" />
+		</action>
+
+		<action path="/userAdd" parameter="do" scope="request"
+			type="de.creatronix.artist3k.controller.action.UserAddAction"
+			attribute="userAddForm" name="userAddForm"
+			validate="true" input="/userAdd.do?do=addUser">
+			<forward name="showUserList"
+				path="/userList.do" redirect="true" />
+			<forward name="showAddUser"
+				path="/jsp/userAdd.jsp" />
+		</action>
+
+		<!-- statistics -->
+
+		<action path="/stats" name="statsForm"
+			type="de.creatronix.artist3k.controller.action.StatsAction"
+			attribute="statsForm" validate="false">
+			<forward name="stats" path="/jsp/stats.jsp" />
+		</action>
+
+
+		<!-- calendar -->
+
+		<action attribute="calendarForm" path="/calendar" parameter="do"
+			name="calendarForm"
+			type="de.creatronix.artist3k.controller.action.CalendarAction"
+			validate="false" input="/calendar.do?do=showMonth">
+			<forward name="showMonth" path="/jsp/calendarMonth.jsp" />
+			<forward name="showDay" path="/jsp/calendarDay.jsp" />
+			<forward name="showUpdatedMonth"
+				path="/calendar.do?do=showMonth" redirect="true" />
+		</action>
+
+		<action attribute="calendarForm" path="/calendarYear"
+			parameter="do" name="calendarForm"
+			type="de.creatronix.artist3k.controller.action.CalendarYearAction"
+			validate="false">
+			<forward name="showYear" path="/jsp/calendarYear.jsp" />
+		</action>
+
+
+	</action-mappings>
+
+	<controller bufferSize="4096" debug="0" />
+	<message-resources
+		parameter="com.yourcompany.struts.ApplicationResources" />
+
+	<plug-in className="de.creatronix.artist3k.db.HibernatePlugIn">
+		<set-property property="configPath" value="/hibernate.cfg.xml" />
+	</plug-in>
+	<!-- Validator Configuration -->
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml, /WEB-INF/validation.xml" />
+	</plug-in>
+</struts-config>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="de.creatronix.artist3k.model">
+
+	<class name="ContactDetails" table="ns_contact_details" lazy="false">
+		<id name="id" column="contact_details_id">
+			<generator class="native" />
+		</id>
+		<property name="email" />
+		<property name="cellPhoneNumber" />
+		<property name="landlineNumber" />
+		<set name="addresses" table="Contact_Details_Adress" cascade="save-update,persist">
+			<key column="contact_details_id" />
+			<many-to-many column="address_id" class="Address" />
+		</set>
+	</class>
+
+</hibernate-mapping>

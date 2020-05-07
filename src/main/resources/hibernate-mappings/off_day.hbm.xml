@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="de.creatronix.artist3k.model">
+	<class name="OffDay" table="ns_off_day" lazy="false">
+
+		<id name="id">
+			<column name="off_day_id" />
+			<generator class="native" />
+		</id>
+		<property name="offDay" type="calendar_date">
+			<column name="off_day" />
+		</property>
+		<many-to-one lazy="false" name="user" class="User" insert="true"
+			cascade="save-update, persist" foreign-key="user" column="user">
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>
